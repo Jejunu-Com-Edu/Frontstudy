@@ -76,7 +76,12 @@
       <audio> : 오디오 파일 삽입
       <video> : 비디오 파일 삽입
       -->
+        <!-- 
+    폼의 동작 과정 : 사용자가 정보를 입력하고 로그인을 누르면 웹 서버로 전송되고, 서버는 자신이 가진 데이터베이스에서 확인하고 그 결과를 웹 브라우저에 보냄.
+    폼과 관련된 작업은 정보를 저장하거나 데이터베이스를 기반으로 작동함. 폼형태는 HTML에서 만들지만 입력한 정보는 ASP, PHP, JSP같은 서버 프로그래밍을 이용해 처리함.
+  -->
       <form action=""autocomplete="off"></form> <!--자동완성기능 끄기-->
+      
       <!-- 
         method : 사용자가 입력한 내용을 서버 쪽 프로그램으로 어떻게 넘길지 지정
          -get : 데이터를 256~4096byte까지만 서버로 넘길 수 있음. 주소 표시줄에 사용자가 입력한 내용이 그대로 드러나는 단점이 있음
@@ -92,14 +97,14 @@
         <legend>배송 정보</legend>
       </fieldset>
       <!-- 폼 요소를 그룹으로 묶어서 표현 -->
-      <label for="user-id">아이디(6자 이상</label>
+      <label for="user-id">아이디(6자 이상)</label>
+      <input type="text" id="user-id">
       <label><input type="radio" name="gift" value="yes">선물 포장</label>
       <label><input type="radio" name="gift" value="no">선물 포장 안 함</label>
       <!-- name속성은 PHP와 같은 웹 프로그래밍에서 폼 요소를 제어할 때 자주 사용. 라디오 버튼에서 하나의 버튼만 선택할 수 있게 하려면 
         모든 라디오 버튼의 name과 똑같이 지정-->
       <br>
       <br>
-      <input type="text" id="user-id">
       <!-- <input> 태그의 type 속성 한눈에 살펴보기 
         text : 한 줄짜리 텍스트를 입력할 수 있는 텍스트 박스 추가
         password : 비밀번호를 입력할 수 있는 필드를 넣음

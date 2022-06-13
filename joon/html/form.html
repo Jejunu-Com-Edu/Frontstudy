@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>register</title>
+</head>
+<body>
+  <div id="container">
+    <h1>회원 가입을 환영합니다</h1>
+    <form>
+      <fieldset>
+        <legend>사용자 정보</legend>
+        <ul>
+          <li>
+            <label for="uid">아이디</label>
+            <input type="text" id="uid">
+          </li>
+          <li>
+            <label for="umail">이메일</label>
+            <input type="email" id="umail">
+          </li>
+          <li>
+            <label for="pwd1">비밀번호</label>
+            <input type="password" id="pwd1">
+          </li>
+          <li>
+            <label for="pw2">비밀번호 확인</label>
+            <input type="password" id="pwd2">
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset>
+        <legend>이벤트와 새로운 소식</legend>
+        <input type="radio" name="mailing" id="mailing_y">
+        <label for="mailing_y">메일 수신</label>
+        <input type="radio" name="mailing" id="mailing_n" checked>
+        <label for="mailing_n">메일 수신 안함</label>
+      </fieldset>
+      <div id="buttons">
+        <input type="submit" value="가입하기">
+        <input type="reset" value="취소">
+      </div>
+    </form>
+  </div>
+  <br>
+  <br>
+  <br>
+
+  <ul>
+    <li>
+      <label><input type="checkbox" value="s_3">선물용 3kg</label>
+      <input type="range" min="0" max="5">개 (최대 5개)
+    </li>
+    <li>
+      <label><input type="checkbox" value="s_5">선물용 5kg</label>
+      <input type="range" min="0" max="3" value="1">개 (최대3개)
+    </li>
+  </ul>
+  <h1>날짜 지정하기</h1>
+  <input type="date">
+  <input type="month">
+  <input type="week">
+  <br>
+  <br>
+  <br>
+  <h1>시간 지정하기</h1>
+  <input type="time">
+  <input type="datetime-local">
+  <input type="date" min="2020-02-01" max="2020-02-15">
+  <div>
+    <input type="submit" value="주문하기">
+    <input type="reset" value="취소하기">
+  </div>
+  <br>
+  <br>
+  <br>
+  <fieldset>
+    <label>아이디 : <input type="text" id="user-id" size="10" ></label>
+    <label>비밀번호 : <input type="password" id="user-pw" size="10" ></label>
+    <br><label><input type="file"></label>
+    <input type="image" src="images/login.png">
+  </fieldset>
+  <form>
+    <input type="button" value="공지 창 열기" onclick="window.open('notice.html)">
+  </form>
+  <br>
+  <br>
+  <!-- 
+    히든 필드는 사용자에게 굳이 보여줄 필요는 없지만 관리자 가 알아야하는 정보들은 히든필드로 입력함
+   -->
+  <input type="hidden" value="사이트를 통한 직접 로그인">
+  <label>아이디: <input type="text" id="user_id" size="20" placeholder="아이디를 입력해주세요"></label>
+  <label>비밀번호: <input type="password" id="user-pw" size="20" placeholder="비밀번호를 입력해주세요"></label>
+  <input type="submit" value="로그인">
+<!-- 
+  submit 버튼은 폼을 서버로 전송하는데 필수 필드가 모두 채워졌는지 검사해야함. 
+  이렇게 입력해야 하는 내용은 required 속성지정해 필 수 필드 제작해야함
+ -->
+ <form>
+  <fieldset>
+    <legend>배송 정보</legend>
+    <ul id="shipping">
+      <li>
+        <label for="prod">주문 상품</label>
+        <input type="text" id="prod" value="상품용 3KG" readonly>
+      </li>
+      <li>
+        <label for="user-name">이름</label>
+        <input type="text" id="user-name" autofocus required>
+      </li>
+      <li>
+        <label for="addr">배송 주소</label>
+        <input type="text" id="addr" required>
+      </li>
+      <li>
+        <label for="mail">이메일</label>
+        <input type="email" id="mail">
+      </li>
+      <li>
+        <label for="phone">연락처</label>
+        <input type="tel" id="phone" placeholder="하이픈 뺴고 입력" required>
+      </li>
+      <li>
+        <label for="d-day">배송 지정</label>
+        <input type="date" id="d-day"> <small>(주문일로부터 최소 3일 이후)</small>
+      </li>
+      <li>
+        <label for="path">가입 경로</label>
+        <select id="path">
+          <option value="blog">블로그</option>
+          <option value="search">검색</option>
+          <option value="sns">SNS</option>
+          <option value="etc">기타</option>
+        </select>
+      </li>
+      <li>
+        <label for="memo">메모</label>
+        <textarea id="memo" cols="40" rows="4" placeholder="남길 말씀이 있다면 여기에"></textarea>
+      </li>
+    </ul>
+  </fieldset>
+  <div>
+    <input type="submit" value="주문하기">
+    <input type="reset" value="취소하기">
+  </div>
+ </form>
+ <!-- 
+  데이터 목록을 만들 때는 datalist 태그를 이용해 데이터 목록의 시작과 끝을 표시하고 그 사이에 option 태그를 사용해 각 데이터 옵션 표시
+  value 속성을 사용해서 서버로 넘겨줄 값 지정을 하는데 이 값이 텍스트 필드에도 나타남
+  -->
+  <!-- <label for="prod2">포장 여부</label>
+  <input type="text" id="prod2" list="pack">
+  <datalist id="pack">
+    <option value="package">선물 포장</option>
+    <option value="no_package">포장 안 함</option>
+  </datalist> -->
+</body>
+</html>
