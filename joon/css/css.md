@@ -317,3 +317,28 @@ p { font-size: 12px; line-height: 200%;}
 #margin3 { margin: 30px 20px 50px; } /* 위 마진 30px, 좌우 마진 20px, 아래 마진 50px */
 #margin4 { margin: 30px 50px 30px 50px;} /* 위 아래 마진 30px, 좌우 마진 50px */
 ```
+
+### 웹 문서 전체를 웹 브라우저 화면 중앙에 배치하기
+```css
+body { background-color: #222;} /*배경색은 어둡게 지정 */
+#container{
+  background-color: #fff;
+  width: 600px; /*가로 너비 600px */
+  margin: 20px auto;  /*위아래 마진은 20px씩, 좌우 마진은 자동 계산*/
+  padding: 20px;
+}
+```
+
+## 마진 중첩 이해하기
+박스 모델에서 마진을 지정할 때 요소를 세로로 배치할 경우 각 요소의 마진과 마진이 서로 만나면 마진값이 큰 쪽으로 겹쳐지는데, 이것을 마진 중첩 또는 마진 상쇄라고 함.
+```css
+div{
+  width: 200px;
+  height: 100px;
+  margin: 30px;
+}
+#box1 {background: rgb(0,77, 243);}
+#box2{background: rgb(255,72,0);}
+```
+
+## 콘텐츠와 테두리 사이의 여백을 설정하는 
