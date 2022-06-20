@@ -310,6 +310,9 @@ p { font-size: 12px; line-height: 200%;}
 }
 ```
 
+## 요소 주변의 여백을 설정하는 margin 속성
+margin은 요소 주변의 여백을 의미, 즉 마진을 이용하면 요소와 요소 사이의 간격을 조절할 수 있음.
+
 ### margin 속성으로 여백 설정하기
 ```css
 #margin1 { margin: 50px; } /* 상하좌우 4개 방향의 마진 모두 50px */
@@ -341,4 +344,62 @@ div{
 #box2{background: rgb(255,72,0);}
 ```
 
-## 콘텐츠와 테두리 사이의 여백을 설정하는 
+## 콘텐츠와 테두리 사이의 여백을 설정하는 padding
+padding 이란 콘텐츠 영역과 테두리 사이의 여백을 말함, 즉 테두리 안쪽의 여백이라고 생각하면 됨. 패딩과 마진은 여백이 어느 위치에 있느냐만 다를 뿐 박스 모델에서 패딩을 지정하는 방법은 마진과 거의 같음.
+
+```css
+#padding1{
+  padding: 20px 30px 40px 50px;
+}
+#padding2{
+  padding: 20px 30px;
+}
+#padding3{
+  padding:
+}
+```
+
+## 배치 방법 결정하는 display 속성
+display 속성을 사용하면 블록 레벨 요소와 인라인 레벨 요소를 서로 바꿔서 사용이 가능함. display 속성은 주로 웹 문서의 내비게이션을 만들면서 메뉴 항목을 가로로 배치할 때 많이 사용하고, 이미지를 표 형태로 배치할 수도 있음.
+```
+block : 인라인 레벨 요소를 블록 레벨 요소를 만듬
+inline : 블록 레벨 요소를 인라인 레벨 요소로 만듬
+inline-block : 인라인 레벨 요소와 블록 레벨 요소의 속성을 모두 가지고 있으며 마진과 패딩을 지정할 수 있음
+none : 해당 요소를 화면에 표시하지 않음
+```
+```css
+*{
+  box-sizing: border-box;
+}
+nav ul{
+  list-style: none;
+}
+nav ul li{
+  display: inline-block; /*인라인 레벨 요소와 블록 레벨 요소 모두 지정*/
+  padding: 20px;
+  margin: 0 20px;
+  border: 1px solid #222; /*메뉴의 테두리 지정 */
+}
+```
+
+## 왼쪽이나 오른쪽으로 배치하는 float 속성
+```
+웹 문서를 만들다 보면 <p>태그처럼 문단의 왼쪽이나 오른쪽에 이미지를 나란히 표시해야 할 경우가 있음. 근데 <p>는 블록 레벨 요소 이므로 이미지와 나란히 한줄에 배치가 불가능함. 이때 float 속성을 사용하여 이미지를 표시하고 그 주변에 텍스트가 둘러 싸도록 할 수 있음.
+```
+```css
+img{
+  float: left;
+  margin-right
+}
+```
+
+## float 속성을 해제하는 clear 속성
+```css
+#box1{
+  background: #ffd800;
+  float: left;
+}
+#box2{
+  background: #0094ff;
+  
+}
