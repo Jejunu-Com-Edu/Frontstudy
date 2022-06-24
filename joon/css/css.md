@@ -382,7 +382,7 @@ nav ul li{
 }
 ```
 
-## 왼쪽이나 오른쪽으로 배치하는 float 속성
+### 왼쪽이나 오른쪽으로 배치하는 float 속성
 ```
 웹 문서를 만들다 보면 <p>태그처럼 문단의 왼쪽이나 오른쪽에 이미지를 나란히 표시해야 할 경우가 있음. 근데 <p>는 블록 레벨 요소 이므로 이미지와 나란히 한줄에 배치가 불가능함. 이때 float 속성을 사용하여 이미지를 표시하고 그 주변에 텍스트가 둘러 싸도록 할 수 있음.
 ```
@@ -393,7 +393,7 @@ img{
 }
 ```
 
-## float 속성을 해제하는 clear 속성
+### float 속성을 해제하는 clear 속성
 ```css
 #box1{
   background: #ffd800;
@@ -403,3 +403,126 @@ img{
   background: #0094ff;
   
 }
+#box3{
+  background: #00ff21;
+}
+#box4{
+  background: #a874ff;
+  clear: left;
+}
+```
+```
+display: inline-block은 가로로 배치하면서도 기본 마진과 패딩을 가지고 있지만, float: left로 배치하면 가로로 배치될 때 요소에 기본 마진과 패딩이 없음. 그래서 필요하다면 요소마다 마진과 패딩을 지정해야 함. 그리고 float: leftf를 사용하면 clear속성으로 플로팅을 해제해야 함.
+```
+2단 레이아웃<br>
+![2way-layout](../img/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-06-24%20%EC%98%A4%ED%9B%84%203.41.47.png)
+
+3단 레이아웃<br>
+![3way-layout](../img/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-06-24%20%EC%98%A4%ED%9B%84%203.42.02.png)
+
+<br>
+<br>
+
+### 웹 요소의 위치를 정하는 left,right,top,bottom 속성
+```
+left : 기준 위치와 요소 사이에 왼쪽으로 얼마나 떨어져 있는지 지정
+right : 기준 위치와 요소 사이에 오른쪽으로 얼마나 떨어져 있는지 지정
+top : 기준 위치와 요소 사이에 위쪽으로 얼마나 떨어져 있는지 지정
+bottom : 기준 위치와 요소 사이에 아래쪽으로 얼마나 떨어져 있는지 지정
+```
+```css
+#pos1 {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+}
+#pos2{
+  position: absolute;
+  right: 100px;
+  top: 100px;
+}
+#pos3{
+  position: absolute;
+  left: 100px;
+  bottom: 100px;
+}
+```
+
+### 배치 방법을 지정하는 Postion 속성
+```
+static : 문서의 흐름에 맞춰 배치함. 기본값임.
+relative : 위칫값을 지정할 수 있다는 점을 제외하면 static과 같음.
+absolute : relative값을 사용한 상위 요소를 기준으로 위치를 지정해 배치함.
+fixed : 브라우저 창을 기준으로 위치를 지정해 배치함.
+```
+
+### background-color 속성
+```css
+background-color: #008000;
+background-color: rgb(0,128,0);
+background-color: green;
+```
+글꼴이나 글자 크기는 body태그 선택자에서 지정하면 문서 전체에 상속됨. 하지만 예외로 background-color값은 상속되지 않음. 기본적으로 모든 웹 문서 요소의 배경은 투명함.
+
+예를들어 body 태그 선택자에 파란색 배경색 스타일을 넣으면, 그 안에 있는 div, p등의 요소에도 마치 파란색이 적용된 것처럼 보임. 하지만 div, p 등의 요소는 기본적으로 기본적으로 투명하므로 그렇게 보이는 것일 뿐 body 태그 선택자의 배경 스타일이 상속된 것은 아님.
+
+<br>
+<br>
+
+### 배경색의 적용 범위를 조절하는 background-clop 속성
+```
+border-box : 박스 모델의 가장 외곽인 테두리까지 적용함. 기본값임.
+padding-box : 박스 모델에서 테두리를 뺀 패딩 범위까지 적용함.
+content-box : 박스 모델에서 내용(콘텐츠) 부분에만 적용함.
+```
+
+### 웹 요소에 배경 이미지를 넣는 background-image 속성
+```
+background-image: url('이미지 파일 경로')
+```
+
+### 배경이미지 반복 방법을 지정하는 background-repeat 속성
+```
+repeat : 브라우저 화면에 가득 찰 때까지 가로, 세로로 반복함. 기본값임.
+repeat-x : 브라우저 화면 너비에 가득 찰 때까지 가로로 반복
+repeat-y : 브라우저 화면 높이에 가득 찰 때까지 세로로 반복
+no-repeat : 한 번만 표시하고 반복하지 않습니다.
+```
+
+### 배경 이미지의 적용 범위를 조절하는 background-origin 속성
+```
+content-box : 박스 모델에서 내용 부분에만 배경 이미지를 표시함. 기본값임.
+padding-box : 박스 모델에서 패딩까지 배경 이미지를 표시함.
+border-box : 박스 모델에서 테두리까지 배경 이미지를 표시함.
+```
+
+### 배경 이미지를 고정하는 background-attachment 속성
+```
+scroll : 화면을 스크롤하면 배경 이미지도 스크롤됨. 기본값임.
+fixed : 화면을 스크롤하면 배경 이미지는 고정되고 내용만 스크롤됨.
+```
+
+### background 속성 하나로 배경 이미지 제거하기
+```css
+background: url('images/bg4.png') no-repeat center bottom fixed;
+```
+
+### 배경 이미지 크기를 조절하는 background-size 속성
+```
+auto : 원래 배경 이미지 크기만큼 표시함. 기본값임.
+contain : 요소 안에 배경 이미지가 다 들어오도록 이미지를 확대,축소함.
+cover : 배경 이미지로 요소를 모두 덮도록 이미지를 확대,축소함.
+<크기> : 이미지의 너비와 높이를 지정함. 값이 하나만 주어질 경우 너빗값으로 인식하며, 이미지의 너비와 너빗값에 맞춘 높잇값도 자동 계산함.
+<백분율> : 배경 이미지가 들어갈 요소의 크기를 기준으로 값을 백분율로 지정하고 그 크기에 맞도록 배경 이미지를 확대, 축소함.
+```
+```css
+  .box{
+    width: 300px;
+    height: 300px;
+    margin: 20px;
+    background: url('images/bg4.jpg') no-repeat left top; /*배경 이미지를 반복하지 않고 왼쪽 상단에 위치*/
+  }
+  #bg1{
+    background-size: auto; /*원래 배경 이미지 크기로 표시 */
+  }
+```
