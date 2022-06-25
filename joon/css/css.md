@@ -525,4 +525,15 @@ cover : 배경 이미지로 요소를 모두 덮도록 이미지를 확대,축�
   #bg1{
     background-size: auto; /*원래 배경 이미지 크기로 표시 */
   }
+  #bg2{
+    background-size:200px; /*너비는 200px, 높이는 자동 계산 */
+  }
+  #bg3{
+    background-size:50%;
+  }
+  #bg4{
+    background-size:100% 100%; /*요소의 너비와 높이를 100% 맞춤 */
+  }
 ```
+
+## 연결 선택자
