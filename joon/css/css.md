@@ -1052,3 +1052,77 @@ scale() 함수는 웹 요소를 지정한 크기만큼 확대하거나 축소함
   transform: rotate3d(2.5, 1.2, -1.5, 55deg); /* x,y,z축에 방향 벡터를 지정하고 있는 55도 회전 */
 }
 ```
+
+### 요소를 비틀어 왜곡하는 skew() 함수
+지정한 각도만큼 요소를 비틀어 왜곡함. 이때 양쪽 방향으로 비틀거나 한쪽 방향으로만 비틀 수도 있음
+```css
+  #skewx:hover{
+    transform: skewX(30deg); /*x축 기준으로 30도 비틀기 */
+  }
+  #skewy:hover{
+    transform : skewY(15deg); /* y축 기준으로 15도 비틀기 */
+  }
+```
+
+## 트랜지션 알아보기
+하나의 스타일을 완전히 다른 스타일로 바꿈. 트랜지션에서는 스타일이 바뀌는 시간을 조절하여 자바스크립트를 사용하지 않고 애니메이션 효과를 낼 수 있음.
+
+### 트랜지션과 속성
+```
+transition-property : 트랜지션의 대상을 지정함
+transition-duration : 트랜지션을 실행할 시간을 지정함
+transition-timing-function : 트랜지션의 실행 형태를 지정함
+transition-delay : 트랜지션의 지연 시간을 지정함
+transition : 위의 4가지 속성을 한꺼번에 정함
+```
+```css
+transition-property: all;
+transition-property: background-color;
+transition-property: width, height;
+
+transition-duration: 2s, 1s; /*트렌지션 시간 - 2초, 1초 */
+
+transition: 2s ease-in; /*transition-property: 기본값 all / transition-duration: 2s / transition-timing-function : ease-in / transition-delay: 기본값 0 */
+```
+
+## 에니메이션 알아보기
+
+### CSS 애니메이션에서 사용하는 속성
+CSS3의 animation 속성은 특정 지점에서 스타일을 바꾸면서 애니메이션을 만드는데, 이렇게 애니메이션 중간에 스타일이 바뀌는 지점을 키프레임(keyframe)이라고 함. 키프레임은 @keyframes 속성으로 정의하고, animation 속성과 그 하위 속성을 이용해서 애니메이션의 실행 시간이나 반복 여부 등을 지정함.
+```
+@keyframes : 애니메이션이 바뀌는 지점을 지정함
+animation-delay : 애니메이션의 시작 시간을 지정함
+animation-direction : 애니메이션을 종료한 뒤 처음부터 시작할지, 역방향으로 진행할지 지정함
+animation-duration : 애니메이션의 실행 시간을 지정함
+animation-iteration-count : 애니메이션의 반복 횟수를 지정함
+animation-name : @keyframes로 설정해 놓은 중간 상태를 지정함
+animation-timing-function : 키프레임의 전환 형태를 지정함
+animation : animation 속성을 한꺼번에 묶어서 지정함
+```
+```css
+@keyframes shape{
+  from{
+    border: 1px solid transparent; /* 1px짜리 투명 테두리에서 */
+  }
+  to{
+    border: 1px solid #000; /* 검은색 테두리로 변경 */
+    border-radius: 50%; /* 테두리를 둥글게 변경 */
+  }
+}
+@keyframes rotate{
+  from{
+    transform: rotate(0deg); /* 0도에서 시작해서 */
+  }
+  to{
+    transform: rotate(45deg); /* 45도까지 회전하기 */
+  }
+}
+
+#box1{
+  background-color: #4cff00;
+  border: 1px solid transparent;
+  animation-name: shpae;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+```
