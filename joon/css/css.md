@@ -951,3 +951,104 @@ table tr:nth-of-type(2n+1){ /*홀수 번째 열만 스타일 적용 */
   </ul>
 </div>
 ```
+
+# 트렌지션 애니메이션
+
+## transform과 변형 함수
+CSS에서 변형을 적용하려면 transform 속성과 변형 함수 이름을 함께 작성해야 함.
+```css
+.photo {
+  transform: translate(50px,100px);
+}
+```
+
+### 2차원 변형과 3차원 변형
+2차원 변형은 웹 요소를 평면에서 변형함. 예를 들어 수평 방향으로 이동하거나 수직 방향으로 왜곡함. 이렇게 평면에서변형할 때는 2차원 좌료플 사용하는데, x축은 오른쪽으로 갈수록 값이 커지고 y축은 아래로 내려갈수록 값이 커짐. 반면 3차원 변형은 x축과 Y축에 원금감을 주는 z축을 추가해서 변형함. 3차원 변형에서 z축은 앞뒤로 이동하며, 보는 사람 쪽으로 다가올수록 값이 커지고 뒤로 갈수록 값이 작아짐.
+<img src="https://t1.daumcdn.net/cfile/tistory/202EA6484F0653932C">
+
+### 2차원 변형 함수
+```
+translate(tx, ty) : 지정한 크기만큼 x축,y축으로 이동함
+translateX(tx) : 지정한 크기만큼 x축으로 이동함
+translateY(ty) : 지정한 크기만큼 y축으로 이동함
+scale(sx, sy) : 지정한 크기만큼 x축과 y축으로 확대, 축소함
+scaleX(sx) : 지정한 크기만큼 x축으로 확대, 축소함
+scaleY(sy) : 지정한 크기만큼 y축으로 확대, 축소함
+rotate(각도) : 지정한 각도만큼 회전함
+skew(ax, ay) : 지정한 각도만큼 x축과 y축으로 왜곡함
+skewX(ax) : 지정한 각도만큼 x축으로 왜곡함
+skewY(ay) : 지정한 각도만큼 y축으로 왜곡함
+```
+
+### 3차원 변형 함수
+2차원 변형 함수에 z축을 추가하면 3차원 변형함수가 됨.
+```
+translate3d(tx, ty, tz) : 지정한 크기만큼 x축, y축, z축으로 이동함
+translateZ(tz) : 지정한 크기만큼 z축으로 이동함
+scale3d(sx, sy, sz) : 지정한 크기만큼 x축과 y축, z축으로 확대, 축소함
+scaleZ(sz) : 지정한 크기만큼 z축으로 확대, 축소함
+rotate(rx, ry, 각도) : 지정한 각도만큼 회전함
+rotate3d(rx, ry, rz, 각도) : 지정한 각도만큼 회전함
+rotateX(각도) : 지정한 각도만큼 x축으로 회전함
+rotateY(각도) : 지정한 각도만큼 y축으로 회전함
+rotateZ(각도) : 지정한 각도만큼 z축으로 회전함
+perspective(길이) : 입체적으로 보일 수 있도록 깊잇값을 지정함
+```
+
+### 웹 요소를 이동시키는 translate() 함수
+translate() 함수는 x축이나 y축 또는 양쪽 방향으로 이동할 거리를 지정하면 해당 요소가 지정한 크기만큼 이동함.
+```css
+#movex:hover{
+  transform: translateX(50px); /*x축으로 50px 이동*/
+}
+#movex:hover{
+  transform: translate(10px, 20px); /* x축으로 10px, y축으로 20px 이동 */
+}
+```
+
+### 요소를 확대, 축소하는 scale() 함수
+scale() 함수는 웹 요소를 지정한 크기만큼 확대하거나 축소함.
+```css
+#sclaex {
+  transform: scaleX(2); /*x축으로 2배 확대 */
+}
+#scale{
+  transform:scale(0.7); /*x,y축으로 0.7배 확대
+}
+```
+
+### 요소를 회전시키는 rotate()함수
+요소를 회전시키는 rotate() 함수는 2차원 회전과 3차원 회전에서 모두 사용이 가능함.
+```css
+/*2차원 회전*/
+#rotate1:hover{
+  transform: rotate(40deg); /*오른쪽으로 40도 회전 */
+}
+#rotate2:hover{
+  transform: rotate(-40deg); /*왼쪽으로 40도 회전 */
+}
+```
+```css
+/* perspective를 이용한 3차원 회전 */
+.rotatex:hover{
+  transform: rotateX(50deg); /* x축으로 50도 회전 */
+}
+#pers{
+  perspective: 300px; /* 원근감 추가 */
+}
+```
+```css
+/* 3차원 회전 */
+#rotatex:hover{
+  transform: rotateX(55deg); /* x축으로 55도 회전 */
+}
+#rotatey:hover{
+  transform: rotateY(55deg); /* y축으로 55도 회전 */
+}
+#rotatez:hover{
+  transform: rotateZ(55deg); /* z축으로 55도 회전 */
+}
+#rotatexyz:hover{
+  transform: rotate3d(2.5, 1.2, -1.5, 55deg); /* x,y,z축에 방향 벡터를 지정하고 있는 55도 회전 */
+}
+```
