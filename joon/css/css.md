@@ -805,3 +805,149 @@ a[title ^= eng]{
     </ul>
   </nav>
 ```
+
+### 요소 상태에 따른 가상 클래스
+웹 사이트나 애플리케이션 화면에서 요소의 상태에 따라 스타일을 적용할 수 있는데, 이때 가상 클래스 선택자를 사용함.
+
+<br>
+
+#### 앵커 대상에 스타일을 적용한 :target 가상 클래스 선택자
+문서에서 같은 사이트나 다른 사이트의 페이지로 이동할 때에는 링크를 이용하고, 같은 문서안에서 다른 위치로 이동할때는 anchor를 이용함. 이때 target 선택자를 사용하면 앵커로 연결된 부분, 즉 앵커의 목적지가 되는 부분의 스타일을 쉽게 적용할 수 있음.
+```html
+<style>
+  #intro:target{
+    background-color: #0069e0;
+    color: #fff;
+  }
+  </style>
+
+  <nav class="navi">
+    <ul>
+      <li><a href="#intro">이용 안내</a></li>
+      <li><a href="#room">객실 소개</a></li>
+      <li><a href="#intro">예약 방법 및 요금</a></li>
+      <li><a href="#ps-2.html">예약하기</a></li>
+    </ul>
+  </nav>
+  <div id="intro" class="contents">
+    <h2>이용 안내</h2>
+  </div>
+  <div id="room" class="contents">
+    <h2>객실 소개</h2>
+  </div>
+  <div id="reservation" class="contents">
+    <h2>예약 방법 및 요금</h2>
+  </div>
+```
+
+### 요소의 사용 여부에 따라 스타일을 적용하는 ':enabled와 :disabled 가상 클래스 선택자'
+해당 요소가 사용할 수 있는 상태일 때 스타일을 지정하려면 :enabled 선택자를 사용하고, 반대로 사용할 수 없는 상태일 때 스타일을 지정하려면 :disabled 선택자를 사용함. 예를 들어 textarea를 사용해 회원 약관을 보여 줄 때는 사용자가 입력할 수 없도록 disabled  속성을 지정해야 함. 이때 :disabled 선택자를 사용하면 텍스트 필드를 쉽게 적용할 수 있음.
+
+### 선택한 항목의 스타일을 적용하는 :checked 가상 클래스 선택자
+폼의 라이도 박스나 체크 박스에서 선택된 항목에는 checked라는 속성이 추가됨. 이렇게 checked 속성이 있는 요소의 스타일을 지정할 때 :checked 선택자를 사용하면 편리함
+
+```html
+<style>
+  #signup input:checked + label{
+    color:red;
+    font-weight: bold;
+  }
+  </style>
+  <ul>
+    <li>
+      <input type="radio" name="room" id="basic">
+      <label for="basic">기본형(최대 2인)</label>
+    </li>
+    <li>
+      <input type="radio" name="room" id="family">
+      <label for="family">가족형(최대 8인)</label>
+    </li>
+  </ul>
+```
+
+### 구조 가상 클래스
+웹 문서의 구조를 기준으로 특정 위치에 있는 요소를 찾아 스타일을 적용할 때 사용하는 가상 클래스 선택자임.
+
+#### 특정 위치의 자식 요소 선택하기
+ 웹 문서에서 특정 요소에 스타일을 적용하려면 보통 class나 id 선택자를 사용해야 하는데, 지정할 요소가 몇 번째이니지를 따져 스타일을 적용할 수 있음.
+ ```
+ :only-child : 부모 안에 자식 요소가 하나뿐일 때 자식 요소를 선택함.
+ A:only-type-of : 부모 안에 A 요소가 하나뿐일 때 선택함.
+ :first-child : 부모 안에 있는 모든 요소 중에서 첫 번째 자식 요소를 선택함.
+ :last-child : 부모 안에 있는 모든 요소 중에서 마지막 자식 요소를 선택함.
+ A:first-of-type : 부모 안에 있는 A 요소 중에서 첫 번째 요소를 선택함.
+ A:last-of-type : 부모 안에 있는 A 요소 중에서 마지막 요소를 선택함.
+ :nth-child(n) : 부모 안에 있는 모든 요소 중에서 n번째 자식 요소를 선택함.
+ :nth-last-child(n) : 부모 안에 있는 모든 요소 중에서 끝에서 n번째 자식 요소를 선택함.
+ A:nth-of-type(n) : 부모 안에 있는 A 요소 중에서 n번째 요소를 선택함.
+ A:nth-last-of-type(n) : 부모 안에 있는 A 요소 중에서 끝에서 n번째 요소를 선택함.
+ ```
+ ```html
+ <style>
+ .contents :nth-child(3){/*.contents의 세번째 자식 요소에 스타일 적용*/
+  background-color : #ffff00;
+ }
+ .contents p:nth-of-type(3){ /*.contents의 p요소 중에서 세번째 자식 요소에 스타일 적용*/
+  background-color : #00b900
+ }
+ </style>
+ <div class="contents">
+  <h2>이용 안내</h2>
+  <p>Excepteur do.....</p>
+  <p>Qui magna culpa.....</p> <!--contents의 모든 자식 요소 중에서 3번째이므로 1 스타일이 지정됨-->
+  <h2>객실 소개</h2>
+  <p>Irure incididunt...</p><!--contents의 p 자식 요소 중에서 3번째이므로 2번째 스타일임-->
+  <h2>예약 방법 및 요금</h2>
+ ```
+
+ #### 수식을 사용해 위치 지정하기
+ 위치를 지정할때 1,3,5번째 처럼 위치가 계속 바뀌면 반복된 규칙을 찾아 an+b처럼 수식을 사용할 수 있음.
+ ```css
+ /*div 요소에서 세 번째 자식인 p 요소에 스타일 적용 */
+ div p:nth-child(3)
+
+/* div 요소에서 홀 수번째로 나타나는 자식인 p 요소에 스타일 적용 */
+div p:nth-child(odd), div p:nth-child(2n+1)
+
+/* div 요소에서 짝수 번째로 나타나는 자식인 p 요소에 스타일 적용 */
+div p:nth-child(even), div p:nth-child(2n)
+```
+<br>
+
+```css
+table tr:nth-of-type(2n+1){ /*홀수 번째 열만 스타일 적용 */
+  background: lightgray;
+  color:black;
+}
+```
+
+### 가상 요소
+가상 클래스가 웹 문서의 여러 요소 중에서 원하는 요소를 선택한다면, 가상 요소는 문서 안의 특정 부분에 슽아리을 지정하기 위해 가상으로 요소를 만들어 추가함. 가상 요소를 만들어 사용하는 이유는 특별히 화면에 보이는 부분을 꾸밀 때 불필요한 태그를 사용하지 않도록 하기 위한 것임. 가상 요소는 가상 클래스와 구별하도록 가상 요소 앞에 콜론 2개(::)를 붙여서 표시함.
+
+#### 첫 번째 줄, 첫 번째 글자에 스타일을 적용하는 ::first-line 요소, ::first-letter 요소
+::first-line, first-letter 요소를 사용하면 지정한 요소의 첫 번째 줄, 첫 번째 글자에 스타일을 적용할 수 있음
+
+#### 내용 앞뒤에 콘텐츠를 추가하는 ::before, ::after요소 
+::before, ::after요소를 사용하면 지정한 요소의 내용 앞뒤에 스타일을 적용함
+```html
+<style>
+  li.new::after{
+    content: "NEW!";
+    font-size:x-small;
+    padding: 2px 4px;
+    margin: 0 10px;
+    border-radius: 2px;
+    background: #f00;
+    color: #fff;
+  }
+</style>
+<div class="container">
+  <h1> 제품 목록 </h1>
+  <ul>
+    <li class="new">제품 A</li>
+    <li>제품 B</li>
+    <li>제품 C</li>
+    <li class="new">제품 D</li>
+  </ul>
+</div>
+```
