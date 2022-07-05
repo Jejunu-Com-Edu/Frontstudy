@@ -1,541 +1,3 @@
-# 스타일과 스타일 시트
-CSS 소스에서 한 줄이 하나의 스타일에 해당하고, 조금 더 들여다보면 줄마다 형태가 비슷하다는 걸
-
-```
-선택자 { 속성1: 속성값1; 속성2: 속성값2}
-```
-맨 앞의 선택자는 스타일을 어느 태그에 적용할 것인지 알려 주는 것이고 줄괄호({})사이에는 스타일 정보를 넣음
-
-```css
-p{
-  text-align: center;
-  color:blue;
-}
-```
-
-```css
-p{ /*css 여러 줄로 표기하기*/
-  text-align: center;
-  color: blue;
-}
-
-p{text-align: center; color: blue;} /*css 한 줄로 표기하기
-```
-
-### CSS 소스 경량화
-```
-CSS 소스에 주석을 넣거나 줄 바꿈하는 것은 웹 사이트 작성자가 알아보기 쉽도록 하는 것일 뿐 웹 브라우저에는 아무 의미가 없음. 웹 브라우저에서 CSS 소스를 읽을 때는 선택자와 속성, 그리고 속상값만 의미가 있음. CSS 소스는 네트워크를 이용해 파일로 내려받으므로 되도록이면 파일 크기가 작은 것이 좋음. 이것을 CSS 소스 경량화라고 함.(CSS compress)
-```
-
-## 스타일 시트
-웹 문서는 스타일 규칙을 여러 개 사용함. 이런 스타일 규칙을 한눈에 확인하고 필요할 때마다 수정하기도 쉽도록 한군데 묶어 놓은 것을 스타일 시트라고 함.
-- 스타일 시트는 크게 웹 브라우저에 기본으로 만들어져 있는 부라우저 기본 스타일과 사이트 제작자가 만든 사용자 스타일로 나눌 수 있음.
-
-- 간단한 스타일 정보라면 스타일 시트를 사용하지 않고 바로 스타일을 적용할 대상에 직접 표시하는데 이걸 인라인 스타일 이라고 함.(html 내부에서)
-    ```css
-    style="color: blue;"
-    ```
-
-- 웹 문서 안에서 사용할 스타일을 같은 내부에서 문서 안에 정리한 것을 내부 스타일 시트라고 함
-
-```html
-    <style>
-
-      h1{
-        padding: 10px;
-        background-color: #222;
-        color: #fff;
-      }
-
-    </style>
-```
-
-- 여러 웹 문서에서 사용할 스타일을 별도 파일로 저장해 놓고 필요할 때 마다 가져와서 사용하는 것이 일반적인데, 이렇게 따로 저장해 놓은 스타일 정보를 외부 스타일 시트라고 한다.
-
-```html
-<link rel="stylesheet" href="css/style.css">
-```
-
-### 전체 선택자
-```css
-*{
-  margin: 0;
-}
-```
-
-### 태그와 요소의 차이
-```
-태그는 말 그대로 태그 자체를 가리키는 반면, 요소는 태그를 적용한 것을 가리킴.
-    <p>텍스트 단락 지정하기<p>
-이 소스에서 <p>와 </p>태그는 태그 자체를 말하는 것이고 태그를 포함해 <p> 태그를 적용한 '텍스트 단락 지정하기'부분을 p요소 라고 함.
-```
-
-### 특정 요소에 스타일을 적용하는 타입 선택자
-```css
-p {
-  font-style: italic;
-}
-```
-
-### 타입 선택자와 태그 선택자의 차이점
-```
-타입 선택자는 태그 이름을 선택자로 사용하므로 태그 선택자라고도 하고, 스타일을 적용하는 대상이 요소이므로 요소 선택자 라고함.
-```
-
-### 특정부분에 적용하는 클래스 선택자
-```html
-<style>
-  .accent {
-    border: 1px solid #000;
-  }
-  .bg{
-    background-color: #ddd;
-  }
-</style>
-
-<h1 class="accent bg">레드향</h1> <!-- accent와 bg클래스 선택자 사용 -->
-<span class="accent">레드향</span> <!-- accent 클래스만 사용 -->
-```
-
-### 특정 부분에 스타일을 한번만 적용할 수 있는 Id 선택자
-```html
-<style>
-  #container{
-    width: 500px;
-    margin: 10px auto;
-    padding: 10px;
-    border: 1px solid #000;
-  }
-</style>
-<div id="container">
-  <h1>레드향</h1>
-```
-
-### 같은 스타일 규칙을 사용하는 요소들을 묶는 그룹 선택자
-```css
-h1,p{
-  text-align: center;
-}
-```
-
-## 캐스케이딩 스타일 시트
-
-CSS에서 'C'는 캐스케이딩의 줄임말이며 스타일 시트에서는 우선순위가 위에서 아래, 즉 계단식으로 적용된다는 의미로 사용됨.그래서 CSS에서는 웹 요소에 둘 이상의 스타일을 적용할 때 우선순위에 따라 적용할 스타일을 결정함. 캐스케이딩은 스타일끼리 충돌하지 않도록 막아주는 중요한 개념임. 캐스케이딩은 스타일끼리 충돌하지 않도록 막아주는 중요한 방법 2가지 방법이 있음
-
-```
-- 스타일 우선순위 : 스타일 규칙의 중요도와 적용 범위에 따라 운선순위가 결정되고, 그 우선순위에 따라 위에서 아래로 스타일을 적용함.
-
-- 스타일 상속 : 태그의 포함 관계에 따라 부모 요소의 스타일을 자식 요소로, 위에서 아래로 전달함.
-```
-
-### 스타일 우선순위
-우선순위란 어떤 스타일 먼저 적용할 것인지 결정하는 규칙을 말함. 위 3가지 개념에 따라 지정됨
-
-  1. 사용자 스타일
-  2. 제작자 스타일
-  3. 브라우저 기본 스타일
-
-위 순서는 브라우저 스타일 순으로 나열한것임. 만약 중요도가 같은 스타일이라면 스타일 적용 범위에 따라 우선순위를 정할 수 있음.  스타일 적용범위가 좁을수록, 즉 정확히 필요한 요소에만 적용할 스타일일수록 우선순위가 높아짐
-
-```
-- !important : 어떤 스타일보다 우선 적용하는 스타일
-
-- 인라인 스타일 : 태그 안에 style 속성을 사용해 해당 태그만 스타일을 적용
-
-- id 스타일 : 지정한 부분에만 적용되는 스타일이지만 한 문서에 한번만 적용 가능( 선택자 앞에 #)
-
-- 클래스 스타일 : 웹 문서에서 지정한 부분에만 적용되는 스타일로 한 문서에 여러번 적용할 수 있음 
-
-- 타입 스타일 : 웹 문서에 사용한 특정 태그에 스타일을 똑같이 적용함
-```
-
-### 스타일 상속
-웹 문서에서 사용하는 여러 태그는 서로 포함 관계가 있음. 이때 포함하는 태그를 부모 요소, 포함된 태그를 자식 요소라고 하고 스타일 시트에서는 자식 요소에서 별도로 스타일을 지정하지 않으면 부모요소의 스타일 속성들이 자식 요소로 전달되는데 이것을 스타일 상속 이라고함<br>
-(참고로 배경색과 배경 이미지는 스타일 상속이 되지 않음. 또한 스타일 상속만으로는 모든 스타일의 충돌을 해결할 수 없음. 만약 부모 요소로부터 글꼴을 상속받은 자식 요소에서 다른 글꼴을 사용하려면, 명시도, 소스 순서에 따라 해결해야함)
-
-<br>
-<br>
-
-# 텍스트 표현 스타일
-
-### 글꼴 지정하는 font-family
-```css
-body { font-family: "맑은고딕", 돋움, 굴림} /*문서 전체 적용*/
-```
-```
-- font-size: <절대 크기>|<상대크기>|<크기>|<백분율>
-
-- 절대크기 : 브라우저에서 지정한 글자크기
-
-- 상대크기 : 부모 요소의 글자 크기를 기준으로 상대적인 글자 크기를 지정
-
-- 크기 : 브라우저와 상관없이 글자 크기를 직접 지정
-
-- 백분율 : 부모 요소의 글자 크기를 기준으로 백분율(%)로 표시
-```
-
-### 이탤릭체로 글자를 표시하는 font-style 속성
-```
-font-style : normal | italic | oblique
-```
-
-### 글자 굵기를 지정하는 font-weight 속성
-```
-font-weight : normal | bold | bolder | lighter | 100 | 200 | ... | 800 | 900
-```
-
-```css
-body{
-  font-size: 20px;
-}
-h1{
-  font-family: 바탕;
-  font-size: 3em;
-}
-.accent{
-  font-size: 150%;
-  font-weight: 800;
-}
-.italic{
-  font-style: italic;
-}
-```
-<br>
-
-## 웹 폰트 사용하기
-사용자 시스템에 없는 글꼴이더라도 웹 문서를 만들 때 사용한 글꼴을 내려받은 후 표시하므로 웹 제작자가 의도한 대로 텍스트를 보여 줄 수 있음.
-
-### 웹 폰트 업로드
-```css
-@font-face{
-  font-family : 'Ostrich';
-  src: local('Ostrich Sans'),
-        url('fonts/ostrich-sans-bold.woff') format('woff'),
-        url('fonts/ostrich-sans0bold.ttf') format('truetype'),
-        url('fonts/ostrich-sans0bold.svg') format('svg'),
-}
-.wfont{
-  font-family: 'Ostrich', sans-serif; /*웹 폰트 지정 */
-}
-```
-
-## 텍스트 관련 스타일
-
-### 글자색 color
-```css
-h1{
-  color: #0000ff;
-}
-```
-
-### rgb 표기법으로 파란색 지정하기
-```css
-h1{color: rgb(0, 0, 255);}
-```
-
-### rgba 표기법으로 불투명도 지정하기
-```css
-h1 { color: rgba(0, 0, 255, 0.5);}
-```
-
-### 텍스트를 정렬하는 text-align 속성 
-```
-start : 현재 텍스트 줄의 시작 위치에 맞추어 문단을 정렬
-end : 현재 텍스트 줄의 끝 위치에 맞추어 문단을 정렬
-left : 왼쪽에 맞추어 문단을 정렬
-right : 오른쪽에 맞추어 문단을 정렬
-center : 가운데에 맞추어 문단을 정렬
-justify : 양쪽에 맞추어 문단을 정렬
-match-parent : 부모 요소를 따라 문단을 정렬
-```
-```css
-.center{
-  text-align : center;
-}
-.justify{
-  text-align : justify;
-}
-```
-
-### 줄 간격을 조절하는 line-hight 속성
-```css
-p { font-size: 12px; line-height: 24px;}
-p { font-size: 12px; line-height: 2.0;}
-p { font-size: 12px; line-height: 200%;}
-```
-
-### 텍스트에 그림자 효과를 추가하는 text-shadow 속성
-```css
-.shaodw1{
-  text-shadow: 1px 1px black; /*가로, 세로거리, 색상지정*/
-}
-```
-
-### 글자 간격 조절하기
-```css
-.spacing1{
-  letter-spacing: 0.2em;
-}
-```
-
-<br>
-
-# 레이아웃을 구성하는 CSS 박스 모델
-
-## 블록 레벨 요소와 인라인 레벨 요소
-박스 모델은 블록 레벨 요소인지 인라인 레벨 요소인지에 따라 나열 방법이 달라짐.
-- 블록 레벨 요소 : 태그를 사용해 요소를 삽입했을 때 혼자 한 줄을 차지하는 것을 가리킴.
-```html
-<h1>시간이란...</h1>
-<div>내일 죽을 것처럼 <p class="accent">오늘</p>을 살고</div>
-<p>영원히 살 것처럼<br>내일을 꿈꾸어라.</p>
-```
-- 인라인 레벨 요소 : 콘텐츠만큼만 영역을 차지하고 나머지 공간에는 다른 요소가 옴
-```html
-<h1>시간이라...</h1>
-<div>내일 죽을 것처럼 <span class="accent">오늘</span>을 살고</div>
-<p>
-```
-
-## 박스 모델의 기본 구성
-마진(margin)<br>
-테두리(border)<br>
-패딩(padding)<br>
-콘텐츠영역<br>
-
-```css
-.box1{
-  width: 400px;
-  height: 100px;
-}
-```
-
-## 요소 주변의 여백을 설정하는 margin 속성
-margin은 요소 주변의 여백을 의미, 즉 마진을 이용하면 요소와 요소 사이의 간격을 조절할 수 있음.
-
-### margin 속성으로 여백 설정하기
-```css
-#margin1 { margin: 50px; } /* 상하좌우 4개 방향의 마진 모두 50px */
-#margin2 { margin: 30px 50px; } /* 위 아래 마진30px, 좌우 마진 50px */
-#margin3 { margin: 30px 20px 50px; } /* 위 마진 30px, 좌우 마진 20px, 아래 마진 50px */
-#margin4 { margin: 30px 50px 30px 50px;} /* 위 아래 마진 30px, 좌우 마진 50px */
-```
-
-### 웹 문서 전체를 웹 브라우저 화면 중앙에 배치하기
-```css
-body { background-color: #222;} /*배경색은 어둡게 지정 */
-#container{
-  background-color: #fff;
-  width: 600px; /*가로 너비 600px */
-  margin: 20px auto;  /*위아래 마진은 20px씩, 좌우 마진은 자동 계산*/
-  padding: 20px;
-}
-```
-
-## 마진 중첩 이해하기
-박스 모델에서 마진을 지정할 때 요소를 세로로 배치할 경우 각 요소의 마진과 마진이 서로 만나면 마진값이 큰 쪽으로 겹쳐지는데, 이것을 마진 중첩 또는 마진 상쇄라고 함.
-```css
-div{
-  width: 200px;
-  height: 100px;
-  margin: 30px;
-}
-#box1 {background: rgb(0,77, 243);}
-#box2{background: rgb(255,72,0);}
-```
-
-## 콘텐츠와 테두리 사이의 여백을 설정하는 padding
-padding 이란 콘텐츠 영역과 테두리 사이의 여백을 말함, 즉 테두리 안쪽의 여백이라고 생각하면 됨. 패딩과 마진은 여백이 어느 위치에 있느냐만 다를 뿐 박스 모델에서 패딩을 지정하는 방법은 마진과 거의 같음.
-
-```css
-#padding1{
-  padding: 20px 30px 40px 50px;
-}
-#padding2{
-  padding: 20px 30px;
-}
-#padding3{
-  padding:
-}
-```
-
-## 배치 방법 결정하는 display 속성
-display 속성을 사용하면 블록 레벨 요소와 인라인 레벨 요소를 서로 바꿔서 사용이 가능함. display 속성은 주로 웹 문서의 내비게이션을 만들면서 메뉴 항목을 가로로 배치할 때 많이 사용하고, 이미지를 표 형태로 배치할 수도 있음.
-```
-block : 인라인 레벨 요소를 블록 레벨 요소를 만듬
-inline : 블록 레벨 요소를 인라인 레벨 요소로 만듬
-inline-block : 인라인 레벨 요소와 블록 레벨 요소의 속성을 모두 가지고 있으며 마진과 패딩을 지정할 수 있음
-none : 해당 요소를 화면에 표시하지 않음
-```
-```css
-*{
-  box-sizing: border-box;
-}
-nav ul{
-  list-style: none;
-}
-nav ul li{
-  display: inline-block; /*인라인 레벨 요소와 블록 레벨 요소 모두 지정*/
-  padding: 20px;
-  margin: 0 20px;
-  border: 1px solid #222; /*메뉴의 테두리 지정 */
-}
-```
-
-### 왼쪽이나 오른쪽으로 배치하는 float 속성
-```
-웹 문서를 만들다 보면 <p>태그처럼 문단의 왼쪽이나 오른쪽에 이미지를 나란히 표시해야 할 경우가 있음. 근데 <p>는 블록 레벨 요소 이므로 이미지와 나란히 한줄에 배치가 불가능함. 이때 float 속성을 사용하여 이미지를 표시하고 그 주변에 텍스트가 둘러 싸도록 할 수 있음.
-```
-```css
-img{
-  float: left;
-  margin-right
-}
-```
-
-### float 속성을 해제하는 clear 속성
-```css
-#box1{
-  background: #ffd800;
-  float: left;
-}
-#box2{
-  background: #0094ff;
-  
-}
-#box3{
-  background: #00ff21;
-}
-#box4{
-  background: #a874ff;
-  clear: left;
-}
-```
-```
-display: inline-block은 가로로 배치하면서도 기본 마진과 패딩을 가지고 있지만, float: left로 배치하면 가로로 배치될 때 요소에 기본 마진과 패딩이 없음. 그래서 필요하다면 요소마다 마진과 패딩을 지정해야 함. 그리고 float: leftf를 사용하면 clear속성으로 플로팅을 해제해야 함.
-```
-2단 레이아웃<br>
-![2way-layout](../img/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-06-24%20%EC%98%A4%ED%9B%84%203.41.47.png)
-
-3단 레이아웃<br>
-![3way-layout](../img/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-06-24%20%EC%98%A4%ED%9B%84%203.42.02.png)
-
-<br>
-<br>
-
-### 웹 요소의 위치를 정하는 left,right,top,bottom 속성
-```
-left : 기준 위치와 요소 사이에 왼쪽으로 얼마나 떨어져 있는지 지정
-right : 기준 위치와 요소 사이에 오른쪽으로 얼마나 떨어져 있는지 지정
-top : 기준 위치와 요소 사이에 위쪽으로 얼마나 떨어져 있는지 지정
-bottom : 기준 위치와 요소 사이에 아래쪽으로 얼마나 떨어져 있는지 지정
-```
-```css
-#pos1 {
-  position: absolute;
-  left: 50px;
-  top: 50px;
-}
-#pos2{
-  position: absolute;
-  right: 100px;
-  top: 100px;
-}
-#pos3{
-  position: absolute;
-  left: 100px;
-  bottom: 100px;
-}
-```
-
-### 배치 방법을 지정하는 Postion 속성
-```
-static : 문서의 흐름에 맞춰 배치함. 기본값임.
-relative : 위칫값을 지정할 수 있다는 점을 제외하면 static과 같음.
-absolute : relative값을 사용한 상위 요소를 기준으로 위치를 지정해 배치함.
-fixed : 브라우저 창을 기준으로 위치를 지정해 배치함.
-```
-
-### background-color 속성
-```css
-background-color: #008000;
-background-color: rgb(0,128,0);
-background-color: green;
-```
-글꼴이나 글자 크기는 body태그 선택자에서 지정하면 문서 전체에 상속됨. 하지만 예외로 background-color값은 상속되지 않음. 기본적으로 모든 웹 문서 요소의 배경은 투명함.
-
-예를들어 body 태그 선택자에 파란색 배경색 스타일을 넣으면, 그 안에 있는 div, p등의 요소에도 마치 파란색이 적용된 것처럼 보임. 하지만 div, p 등의 요소는 기본적으로 기본적으로 투명하므로 그렇게 보이는 것일 뿐 body 태그 선택자의 배경 스타일이 상속된 것은 아님.
-
-<br>
-<br>
-
-### 배경색의 적용 범위를 조절하는 background-clop 속성
-```
-border-box : 박스 모델의 가장 외곽인 테두리까지 적용함. 기본값임.
-padding-box : 박스 모델에서 테두리를 뺀 패딩 범위까지 적용함.
-content-box : 박스 모델에서 내용(콘텐츠) 부분에만 적용함.
-```
-
-### 웹 요소에 배경 이미지를 넣는 background-image 속성
-```
-background-image: url('이미지 파일 경로')
-```
-
-### 배경이미지 반복 방법을 지정하는 background-repeat 속성
-```
-repeat : 브라우저 화면에 가득 찰 때까지 가로, 세로로 반복함. 기본값임.
-repeat-x : 브라우저 화면 너비에 가득 찰 때까지 가로로 반복
-repeat-y : 브라우저 화면 높이에 가득 찰 때까지 세로로 반복
-no-repeat : 한 번만 표시하고 반복하지 않습니다.
-```
-
-### 배경 이미지의 적용 범위를 조절하는 background-origin 속성
-```
-content-box : 박스 모델에서 내용 부분에만 배경 이미지를 표시함. 기본값임.
-padding-box : 박스 모델에서 패딩까지 배경 이미지를 표시함.
-border-box : 박스 모델에서 테두리까지 배경 이미지를 표시함.
-```
-
-### 배경 이미지를 고정하는 background-attachment 속성
-```
-scroll : 화면을 스크롤하면 배경 이미지도 스크롤됨. 기본값임.
-fixed : 화면을 스크롤하면 배경 이미지는 고정되고 내용만 스크롤됨.
-```
-
-### background 속성 하나로 배경 이미지 제거하기
-```css
-background: url('images/bg4.png') no-repeat center bottom fixed;
-```
-
-### 배경 이미지 크기를 조절하는 background-size 속성
-```
-auto : 원래 배경 이미지 크기만큼 표시함. 기본값임.
-contain : 요소 안에 배경 이미지가 다 들어오도록 이미지를 확대,축소함.
-cover : 배경 이미지로 요소를 모두 덮도록 이미지를 확대,축소함.
-<크기> : 이미지의 너비와 높이를 지정함. 값이 하나만 주어질 경우 너빗값으로 인식하며, 이미지의 너비와 너빗값에 맞춘 높잇값도 자동 계산함.
-<백분율> : 배경 이미지가 들어갈 요소의 크기를 기준으로 값을 백분율로 지정하고 그 크기에 맞도록 배경 이미지를 확대, 축소함.
-```
-```css
-  .box{
-    width: 300px;
-    height: 300px;
-    margin: 20px;
-    background: url('images/bg4.jpg') no-repeat left top; /*배경 이미지를 반복하지 않고 왼쪽 상단에 위치*/
-  }
-  #bg1{
-    background-size: auto; /*원래 배경 이미지 크기로 표시 */
-  }
-  #bg2{
-    background-size:200px; /*너비는 200px, 높이는 자동 계산 */
-  }
-  #bg3{
-    background-size:50%;
-  }
-  #bg4{
-    background-size:100% 100%; /*요소의 너비와 높이를 100% 맞춤 */
-  }
-```
-
 # 연결 선택자
 둘 이상의 선택자를 연결해서 스타일이 적용될 요소가 어느 부분인지 지정하는 것. 선택자를 둘 이상 조합하므로 '조합 선택자'라고도 하고 '콤비네이션 선택자'등 이라고 부름
 
@@ -920,7 +382,7 @@ table tr:nth-of-type(2n+1){ /*홀수 번째 열만 스타일 적용 */
   color:black;
 }
 ```
-
+ 
 ### 가상 요소
 가상 클래스가 웹 문서의 여러 요소 중에서 원하는 요소를 선택한다면, 가상 요소는 문서 안의 특정 부분에 슽아리을 지정하기 위해 가상으로 요소를 만들어 추가함. 가상 요소를 만들어 사용하는 이유는 특별히 화면에 보이는 부분을 꾸밀 때 불필요한 태그를 사용하지 않도록 하기 위한 것임. 가상 요소는 가상 클래스와 구별하도록 가상 요소 앞에 콜론 2개(::)를 붙여서 표시함.
 
@@ -1277,3 +739,435 @@ orientation: landscap : 단말기의 가로 모드를 지정함
 - 스마트폰 : 모바일 페이지는 미디어 쿼리를 사용하지 않고 기본 CSS로 작성함. 만일 스마트폰의 방향까지 고려해서 제작한다면 min-width의 세로와 가로를 각각 portrait 320px, landscape 480px로 지정함
 - 태블릿 : 세로 크기가 768px 이상이면 태블릿으로 지정함. 가로 크기는 데스크톱과 똑같이 1024px이상으로 지정함
 - 데스크톱 : 화면 크기가 1024px 이상이면 데스크톱으로 설정함
+(모바일 기기의 뷰포트 크기는 yesviz.com/devices.php)
+
+<br>
+
+### 미디어 쿼리 적용하기
+미디어 쿼리는 크게 외부 CSS 파일로 연결하는 방법과 웹 문서에 직접 정의하는 방법이 있음
+
+####  - 외부 CSS 파일 연결하기
+외부 CSS 파일을 따로 저장해서 만드는 방법이 있는데 ```<link>``` 태그나 ```@import```문을 사용함.
+```html
+<link rel = "stylesheet" media="print" href="css/print.css">
+
+<style>
+  @import url("css/tablet.css") only screen and (min-width: 321px) and (max-widyh: 769px);
+</style>
+```
+```
+<link>태그와 @import문
+<link>태그와 @import문은 모두 외부에서 CSS파일을 가져와 사용하는 방법임. CSS파일이 한두개밖에 없다면 속도나 처리면 에서는 큰 차이가 없음. 하지만 익스플로어의 @경우 import문과 자바스크립트가 함께 있을 때 자바스크립트를 먼저 내려받은 후에 @import문에 있는 CSS를 다운받음. 그래서 자바스크립트에서 스타일과 관련된 정보를 처리해야 할 경우 오류가 날 수도 있음. 그래서 CSS 파일이 많고 규모가 큰 사이트를 개발한다면 @import문보다 <link>를 주로 사용함.
+```
+
+#### 웹 문서에 직접 정의하기
+외부 CSS파일을 만들지 않고 웹 문서에서 미디어 쿼리를 직접 지정하는 방법 이 있는데 첫 번째는 ```<style>``` 태그 안에서 media속성을 사용하여 조건을 지정하고, 그 조건에 맞는 스타일 규칙을 정의하는 것
+```html
+<style media = "screen and (max-width: 320px)"> /*너비가 320px 이하일 때 배경색을 주황색) */
+  body{
+    background-color : orange;
+  }
+</style>
+```
+
+두번째는 스타일을 선언할 때 @media 문을 사용해 각 조건별로 스타일을 지정해 놓고 스타일을 선택해서 적용하는 것
+```html
+<style>
+  @media screen and (max-width: 320px){
+    body{
+      background-color : orange;
+    }
+  }
+</style>
+```
+
+## 그리드 레이아웃
+웹 사이트의 레이아웃을 정할 때 사이트 전체 디자인이나 일관성을 유지하려면 그리드 레이아웃을 사용해야 함. 반응형 웹 디자인을 사용한 사이트는 화면 너비에 따라 웹 문서의 요소를 재배치해야 함. 이때 기준 레이아웃이 필요한대 이때 그리드 레이아웃을 사용함. 그리드 레이아웃이란 웹 사이트를 여러 개의 칼럼으로 나눈 후 메뉴나 본문, 이미지 등의 웹 요소를 화면에 맞게 배치하는 것을 말함.<p>
+그리드 레이아웃이란 웹 사이트를 여러 개의 칼럼으로 나눈 후 메뉴나 본문, 이미지 등의 웹 요소를 화면에 맞게 배치하는 것을 말함. 그리드 레이아웃을 사용하면 화면을 규칙적으로 배열하므로 레이아웃을 일관성 있게 유지할 수 있음.
+-  시각적으로 안정된 디자인을 만들 수 있음.
+- 업데이트가 편한 웹 디자인을 구성할 수 있음.
+- 요소를 자유롭게 배치할 수 있음.
+
+<br>
+
+### 그리드 레이아웃 만들기
+반응형 웹 디자인에 적합한 그리드 레이아웃을 만드는 방법은 여러 가지가 있음. 기존 가변 그리드를 css의 float 속성으로 사용할 수도 있고, 플렉서블 박스 레이아웃이나 css 그리드 레이아웃으로 적용할 수도 있음.
+
+<br>
+
+#### 플렉서블 박스 레이아웃
+플렉서블 박스 레이아웃은 그리드 레이아웃을 기본으로 하고 각 박스를 원하는 위치에 따라 배치하는 것임. 이때 여유 공간이 생길 경우 너비나 높이를 적절하게 늘이거나 줄일 수도 있음. 플렉서블 박스 레이아웃은 흔히 플렉스 박스 레이아웃이라고도 하므로 앞으로는 줄여서 플렉스 박스라고 함.<p>
+플렉스 박스는 수평 방향이나 수직 방향 중에서 한쪽을 주축으로 정하고 박스를 배치함. 박스를 왼쪽에서 오른쪽으로 순서대로 배치하는데, 화면 너비를 넘어가면 수직으로 이동해서 다시 순서대로 배치가됨.
+
+![flexbox](https://t1.daumcdn.net/cfile/tistory/2454A93D568784B40D)
+
+#### CSS 그리드 레이아웃
+그리드 레이아웃을 많이 사용하면서 플렉스 박스에 이어 CSS 그리드 레이아웃이라는 새로운 CSS 표준이 만들어짐. 플렉스 박스를 사용할 때는 '주축'이라는 개념이 있어서 수평이나 수직 중 하나를 기준으로 해서 요소를 배치함. 하지만 CSS 그리드 레이아웃은 수평과 수직 어느 방향이든 배치할 수 있음. 마치 레고 블록을 끼워 맞추듯 요소를 배치한다고 생각하면 되고, 대부분 모던 브라우저에서 사용할 수 있음.
+
+## 플렉스 박스 레이아웃 
+플렉스 박스 레이아웃은 비교적 최근 등장한 개념이고 그리드 레이아웃을 기본으로 함.
+![flexboxlayout](https://velog.velcdn.com/images%2Fhanan0105%2Fpost%2F8a2016e2-d133-4209-bffa-4ae939271da2%2Fimage.png)
+
+<br>
+
+### 플렉스 박스 항목을 배치하는 속성
+플렉스 박스에는 플렉스 항목이 여러 개 있는데 일괄적으로 한꺼번에 배치할 수도 있고, 주축이나 교차축 기준으로 다양하게 배치할 수도 있음.
+```
+justify-content : 주축 방향의 정렬 방법
+align-items : 교차축 방향의 정렬 방법
+align-self : 교차축에 있는 개별 항목의 정렬 방법
+align-content : 교차축에서 여러 줄로 표시된 항목의 정렬 방법
+```
+
+#### 플렉스 컨테이너를 지정하는 display 속성
+플렉스 박스 레이아웃을 만들려면 먼저 웹 콘텐츠를 플렉스 컨테이너로 묶어 주어야함. 즉, 배치할 웹 요소가 있다면 그 요소를 감싸는 부모 요소를 만들고, 그 부모 요소를 플렉스 컨테이너로 만들어야 함. 이때 플렉스 컨테이너로 동작하려면 display 속성을 이용해 이 부분을 플렉스 박스 레이아웃을 적용하겠다고 지정해야 함.
+```
+flex : 컨테이너 안의 플렉스 항목을 볼록 레벨 요소로 배치함
+inline-flex : 컨테이너 안의 플렉스 항목을 인라인 레벨 요소로 배치함
+```
+
+#### 플렉스 방향을 지정하는 flex-directon 속성
+플렉스 컨테이너 안에서 플렉스 항목을 배치하는 주축과 방향을 지정하는 속성임.
+```
+row : 주축을 가로로 지정하고 왼쪽에서 오른쪽으로 배치
+row-reverse : 주축을 가로로 지정하고 반대로 오른쪽에서 왼쪽으로 배치
+column : 주축을 세로로 지정하고 위쪽에서 아래쪽으로 배치
+column-reverse : 주축을 세로로 지정하고 아래쪽에서 위쪽으로 배치
+```
+ex) 다음은 1, 2, 3이라는 숫자가 써 있는 박스 3개를 플렉스 컨테이너로 묶고, 컨테이너 안에 있는 플렉스 항목을 여러 방법으로 배치한 것임.
+```css
+  .container {
+    display: flex; /*플렉스 컨테이너 지정*/
+  }
+  #opt1{
+    flex-direction: row; /*왼쪽에서 오른쪽으로*/
+  }
+  #opt2{
+    flex-direction: row-reverse; /*오른쪽에서 왼쪽으로*/
+  }
+  #opt3{
+    flex-direction: column; /*위에서 아래로*/
+  }
+  #opt4{
+    flex-direction: column-reverse; /*아래에서 위로*/
+  }
+```
+
+
+#### 플렉스 항목의 줄을 바꾸는 flex-wrap 속성
+flex-wrap 속성은 플렉스 컨테이너 너비보다 많은 플렉스 항목이 있을 경우 줄을 바꿀지 여부를 지정함. 속성값으로 wrap이나 wrap-reverse로 지정한 후 웹 브라우저 화면의 너비를 늘리거나 줄여 보면 ㅡㄹ렉스 컨테이너 너비에 따라 여러줄로 표시됨.
+```
+nowrap : 플렉스 항목을 한줄에 표시함(기본값)
+wrap : 플렉스 항목을 여러 줄에 표시함
+wrap-reverse : 플렉스 항목을 여러 줄에 표시하되, 시작점과 끝점이 바뀜
+```
+```css
+#opt1{
+  flex-wrap : nowrap;/*한 줄에 표시*/
+}
+#opt2{
+  flex-wrap : wrap; /*여러 줄에 표시*/
+}
+#opt3{
+  flex-wrap : wrap-reverse; /*항목의 순서를 바꿔 여러 줄에 표시*/
+}
+```
+
+#### 배치 방향과 줄 바꿈을 한꺼번에 지정하는 flex-flow 속성
+flex-flow속성은 flex-direction 속성과 flex-wrap 속성을 한꺼번에 지정하여 플렉스 항목의 배치 방향을 결정하거나 줄을 바꿈
+```css
+#opt1{
+  flex-flow: row wrap; /*왼쪽에서 오른쪽, 여러 줄*/
+}
+#opt2{
+  flex-flow: row nowrap; /*왼쪽에서 오른쪽, 한 줄*/
+}
+```
+
+#### 주축 정렬 방법을 지정하는 justify-content 속성
+justify-content 속성은 주축에서 플렉스 항목 간의 정렬 방법을 지정함
+```
+flex-start : 주축의 시작점에 맞춰 배치함
+flex-end : 주축의 끝점에 맞춰 배치함
+center : 주축의 중앙에 맞춰 배치함
+space-between : 첫 번째 항목과 끝 항목을 주축의 시작점과 끝점에 배치한 후 나머지 항목은 그 사이에 같은 간격으로 배치함
+space-around : 모든 항목을 주축에 같은 간격으로 배치함
+```
+```css
+#opt1{
+  justify-content: flex-start; /*주축 시작점 기준 */
+}
+#opt2{
+  justify-content: flex-end; /*주축 끝점 기준 */
+}
+#opt3{
+  justify-content: center; /*주축 중앙 기준 */
+}
+#opt4{
+  justify-content: space-between; /* 시작점과 끝점 배치한 후 같은 간격 */
+}
+#opt5{
+  justify-content: space-around; /*전체 항목 같은 간격 */
+}
+```
+
+#### 교차축 정렬 방법을 지정하는 align-items 속성
+justify-content 속성이 주축에서 항목을 정렬하는 방법이라면, align-items 속성은 교차축을 기준으로 플렉스 항목을 정렬함
+```
+flex-start : 교차축의 시작점에 맞춰 배치함
+flex-end : 교차축의 끝점에 맞춰 배치함 
+center : 교차축의 중앙에 배치함
+baseline : 교차축의 문자 기준선에 맞춰 배치함
+stretch : 플렉스 항목을 늘려 교차축에 가득 차게 배치함
+```
+```css
+#opt1{
+  align-items: flex-start; /*주축 시작점 기준으로 배치*/
+}
+#opt1{
+  align-items: flex-end; /*주축 끝점 기준으로 배치*/
+}
+#opt1{
+  align-items: center; /* 주축 중앙 기준으로 배치 */
+}
+#opt1{
+  align-items: baseline; /* 문자 기준선에 맞춰 배치*/
+}
+#opt5{
+  align-items: stretch; /* 항목을 늘려 교차축에 가득 차게 배치 */
+}
+```
+
+#### 특정 항목만 정렬 방법을 지정하는 align-self속성
+align-item 속성은 교차축을 기준으로 플렉스 항목의 정렬 방법을 결정하지만 그중에서 특정 항목만 지정하고 싶다면 align-self 속성을 사용함. 그래서 align-item 속성은 플렉스 컨테이너를 지정하는 선택자에서 사용하지만 align-self 속성은 플렉스 항목 선택자에서 사용함. align-self속성에서 사용하는 값은 align-items 속성에서 사용하는 값과 같음.
+```css
+.container{
+  display: flex; /*플렉스 컨테이너 지정 */
+  align-items: center; /*교차축의 중앙에 배치 */
+}
+#box1{
+  align-self: flex-start; /* 교차축의 시작점에 배치 */
+}
+#box3{
+  align-self: stretch; /* 교차축에 가득차게 늘림 */
+}
+```
+
+#### 여러 줄일 때 교차축 정렬 방법을 지정하는 align-content속성
+주축에서 줄 바꿈이 생겨서 플렉스 항목을 여러 줄로 표시할 때 align-content 속성을 사용하면 교차축에서 플렉스 항목 간의 간격을 지정할 수 있음.
+``` 
+한 줄일 경우에는 align-items 속성을 사용
+
+flex-start : 교차축의 시작점에 맞춰 배치
+flex-end : 교차축의 끝점에 맞춰 배치
+center : 교차축의 중앙에 맞춰 배치
+space-between : 첫 번째 항목과 끝 항목을 교차축의 시작점과 끝점에 맞추고 나머지 항목은 그 사이에 같은 간격으로 배치함
+space-around : 모든 항목을 교차축에 같은 간격으로 배치
+stretch : 플렉스 항목을 늘려서 교차축에 가득 차게 배치
+```
+
+```css
+.container{
+  display : flex;
+  flex-flow : row wrap;
+}
+#opt1{ align-content : flex-start; } /* 교차축 시작점 기준 */
+#opt2{ align-content : flex-end; } /* 교차축 끝점 기준 */
+#opt3{ align-content : center; } /* 교차축 중앙 기준 */
+#opt4{ align-content : space-between; } /* 시작점과 끝점에 배치한 뒤 중간 항목은 같은 간격으로 배치 */
+#opt5{ align-content : space-around; } /* 전체 항목을 같은 간격으로 배치 */
+#opt6{ align-content : stretch; } /* 항목을 늘려 교차축에 가득 차게 배치 */
+```
+
+#### 플렉스 레이아웃을 활용해 항상 중앙에 표시하기
+플렉스 박스 레이아웃을 사용하면 화면 요소를 세로 방향으로 중앙에 배치하는 것이 간단해짐.
+```css
+*{
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+  background : url('') no-repeat left top fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+button{
+
+}
+```
+
+## CSS 그리드 레이아웃 
+웹 디자인 레이아웃을 만들 때 그리드 레이아웃은 아주 중요함. 웹 사이트를 제작할 때 고려해야 할 기기가 나날이 늘어나고 있기 때문인데, 소스를 최대한 간단하게 유지하면서 대부분의 기기에 대응할 수 있는 그리드 레이앙수 기법이 바로 CSS 그리드 레이아웃임. 플렉스 박스 레이아웃은 플렉스 항목을 배치할 때 가로나 세로 중에서 하나를 주축으로 정해 놓고 배치하지만 CSS 그리드 레이아웃에서는 그리드 항목을 배치할 때 가로와 세로를 모두 사용함. 그래서 플렉스 항목은 1차원이고 CSS 그리드 레이아웃은 2차원이라고 말함
+![gridlayout](https://968663149-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LH1dN99ZXtZTFG_0JKV%2F-LH5dU3TZ9KBFb0v9kxv%2F-LH5fZWVTqFDi6AV1QNB%2Fimage.png?alt=media&token=9890257b-f37b-45a5-97ef-8f92820ca82e)
+
+<br>
+<br>
+
+### CSS 그리드 레이아웃 항목을 배치하는 속성
+CSS 그리드 레이아웃은 가장 최근에 제안된 그리드 레이아웃 제작 방법임
+
+<br>
+
+#### 그리드 컨테이너를 지정하는 display 속성
+그리드 레이아웃을 지정할 때에는 가장 먼저 그리드를 적용할 요소의 바깥 부분을 그리드 컨테이너로 만들어야 함. 그리드 컨테이너를 만들 때는 display 속성을 grid나 inline-grid로 지정함
+```
+grid : 컨테이너 안의 항목을 볼록 레벨 요소로 배치
+inline-grid : 컨테이너 안의 항목을 인라인 레벨 요소로 배치
+```
+
+<br>
+
+#### 칼럼과 줄을 지정하는 grid-template-columns, grid-template-rows 속성
+그리드 컨테이너 안에 항목을 배치할 때 칼럼과 줄의 크기와 개수를 지정하려면 grid-template-columns 속성과 grid-template-rows 속성을 각각 사용함. grid-template-columns 속성은 그리드 컨테이너 안의 항목을 몇 개의 칼럼으로 배치할지, 각 칼럼의 너비를 얼마로 할지 지정함.
+```css
+#wrapper{
+  display: grid; /*그리드 컨테이너 지정 */
+  grid-template-columns : 200px 200px 200px; /* 너비가 200px인 칼럼 3개 */
+  grid-template-rows : 100px; /* 줄 높이 100px */
+}
+```
+
+#### 상대적인 크기를 지정하는 fr 단위
+그리드 레이아웃에서 컬럼이나 줄의 크기를 지정할 때 픽셀(px)을 이용하면 항상 크기가 고정되므로 반응형 웹 디자인에는 적합하지 않음. 그래서 그리드 레이아웃에서는 상대적인 크기를 지정할 수 있도록 fr(fraction) 단위를 사용함.
+```css
+grid-template-columns: 1fr 1fr 1fr; /*너비가 같은 칼럼 3개 */
+
+grid-template-columns: 2fr 1fr 2fr; /* 칼럼을 2: 1: 2로 배치 */
+```
+
+#### 값이 반복될 때 줄여서 표현할 수 있는 repeat() 함수
+px이나 fr단위를 사용하면 똑같은 값을 여러 번 반복해야 함. CSS 그리드 레이아웃에는 내장된 repeat() 이라는 함수를 사용하면 반복하지 않고 간단하게 표헌할 수 있음
+```css
+gride-template-columns : 1fr 1fr 1fr;
+ /*같은 표현식 */
+grid-template-columns : repeat(3,1fr);
+```
+
+#### 최솟값과 최댓값을 지정하는 minmax() 함수
+줄 높이보다 내용이 더많으면 보이지가 않는데, minmax() 함수를 사용하면 줄 높이를 고정하지 않고 최솟값과 최댓값을 사용해서 유연하게 지정이 가능함
+```css
+#wrapper{
+  width: 600px;
+  display: grid; /*그리드 컨테이너 지정 */
+  grid-template-columns: repeat(3, 1fr); /*너비가 같은 칼럼 3개*/
+  grid-template-rows: minmax(100px, auto); /*줄 높이는 최소 100px*/
+}
+```
+
+#### 자동으로 칼럼 개수를 조절하는 auto-fill, auto-fit값
+repeat()를 사용해 크기가 같은 칼럼을 반복할 때는 칼럼의 개수를 지정하는데, 이때 칼럼의 너빗값과 함께 auto-fit이나 auto-fill을 지정하면 화면 너비에 따라 칼럼 개수를 조절할 수 있음. 
+```css
+grid-template-columns : repeat(auto-fit, 200px);
+```
+auto-fit이나 auto-fill 모두 칼럼 개수를 자동으로 조절해 주므로 화면이 넓어지면 칼럼 개수가 많아지고 반대로 화면이 좁아지면 칼럼 개수가 줄어듬. 두 값의 차이는 남는 공간을 채울지 말지 여부에 있음.
+```css
+#wrapper1{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-bottom: 20px;
+}
+#wrapper2{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+```
+![auto](https://velog.velcdn.com/images%2Fdongha1992%2Fpost%2F0c6c3f10-7a3f-4bde-aa8d-453fea787c58%2F%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202020-09-09%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%203.51.46.png)
+
+#### 그리드 항목의 간격을 지정하는 grid-column-gap, grid-row-gap, grid-gap 속성
+그리드 레이아웃은 기본적으로 항목들이 서로 붙어 있음. 이때 조절하는 함수를 사용하면 조절이 가능함
+```
+grid-column-gap: 칼럼과 칼럼 사이의 간격을 지정함
+grid-row-gap: 줄과 줄 사이의 간격을 지정함
+grid-gap : 칼럼과 줄 사이의 간격을 한꺼번에 지정함
+```
+```css
+#wrapper{
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  grid-gap: 20px 30px; /*칼럼 간격 30px, 줄 간격 20px */
+}
+```
+
+#### 그리드 라인을 이용해 배치하기
+그리드 레이아웃은 눈에 보이지 않는 그리드 라인이 포함되어 있음. 예를 들어 칼럼 3개와 줄 3개로 이루어진 그리드 레이아웃이 있을때, 칼럼라인은 앞에서부터 번호가 매겨지므로 총 4개임. 마찬가지로 줄에서도 총 4개의 줄 라인이 있음 또한 그리드 라인 속성을 이용해서 그리드 항목을 배치할 수 있음
+![gridline](https://968663149-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LH1dN99ZXtZTFG_0JKV%2F-LH5dU3TZ9KBFb0v9kxv%2F-LH5fxvo4g7OuwZzrtOr%2Fimage.png?alt=media&token=e5e56b1f-069d-4afa-85b7-1e09c35464ac)
+
+
+```
+grid-column-start : 칼럼 시작의 라인 번호를 지정함 | grid-column-start: 1
+grid-column-end : 칼럼 시작의 라인 번호를 지정함 | grid-column-end: 1
+grid-column : 칼럼 시작의 라인 번호를 지정함 | grid-column: 1/4
+grid-row-start : 칼럼 시작의 라인 번호를 지정함 | grid-end-start: 2
+grid-row-end : 칼럼 시작의 라인 번호를 지정함 | grid-row-end: 4
+grid-row : 칼럼 시작의 라인 번호를 지정함 | grid-row: 2/4
+```
+```css
+#wrapper{
+  width: 700px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 100px);
+}
+```
+
+```css
+.box1{
+  background-color: 3689ff;
+  grid-column: 1/4;
+}
+.box2{
+  background-color: #00cf12;
+  grid-row: 2/4;
+}
+.box3{
+  background-color: #ff9019;
+  grid-column: 2/4;
+  grid-row-start: 2;
+}
+.box4{
+  background-color: #ffd000;
+  grid-column-start: 3;
+  grid-row-start: 3;
+}
+```
+![gridlayoutex](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAU0AAACXCAMAAACm/PkLAAABdFBMVEU2if////8AzxL/kBn/0ACoxv8ohP8qif+WjMD/kAD/zAAAywA3h///kyQA0gD/kRn/1AAopb/I8Mn/iAD/6dvN3f//9doegf/d6P//ixr/jAD///U6g/87gP9kvP//9f//vK7l7f/t8/8LfP+05//N0/9osf+t4v/EzP+Uyv/a8f/3/v/r6P9+sv/n+P+Xrf/c2f8Acf/o//+ct/9CeP+AyP89ov/17P+Duv+Fpf+74v9wnP//9/+8wv/g4f9asf/L5OsU0mzt/N1U1QBY45697bqL3kz/88b/ya7/1q75/+e47qaG4qL/fwD/oX3/0qH/2tpi0iEA0kDR+O2m5GOC68je8Zoa1Wb/rXv/8+//tjn/xnj/ogD/pWHn9reu9/bL6YN21AAt2Yr/1oX/riD/1cD/5+u35FAAz1D/oI3m+umu5W1f1zb/y4D/tpj/s2T/1lf/4nP//9X/5Zz/6q7/2Dz/5Yb/7pn/5C//6sb/4lf/64/3icSzAAADq0lEQVR4nO3b/1MTRwCG8WxNr5JLwJrI0buWClQRA2pjhbZarcaSNiqKgBhBkdZGSlsEkiDUf765Th058cuEe3MJ8Xkmk8zNZGdvPtmb3V8SM6Qr1uob6KjQVIamMjSVoakMTWW+5sDHFKbBgOaxIYv231BfUNOJ0f5z0BSGpjI0laGpDE1lB0TTsnZfJa23fa/FHQxN56sTuwCdkyc+b929vKsDojl8asiJWY5jOfUj8oj58otW39GbOyiap7OjyRFjxs6cHRm1+tEMkzN87uvcefPNhYnx7EQSzXA5wxPfZr/Ljn0/2j8weNHpv4RmiKyRY30/OGMDl8f7Ll44Z125zC4UJn8DiiUdJ+kk64clTkgfRGgqQ1MZmsrQVIamMjSVoakMTWVoKkNTGZrK0FSGpjI0laGpDE1laCpDUxmaytBUhqYyNJWhqQxNZWgqQ1PZHs1kVH3Sgb2m+eOnkXW4Ewv+z/Jod2S5XZ1XOhPUtD+Kqs8OdV5oKkNTGZrK0FSGprIwmt2BL9t2Y79E8zXddODKbfqEYTS7r17L78K8/tNkQ5xN13SPF3Zxpn7+JdXsGcNpFvO2vyT9VWlfvXHT5N8/KFLNzVvp+gJNu2nXTU/dvlPoavaU4TSPFqfvznizc/fuzkza822n2Vvace+XSg/KC1OZxYd3bjf9WQ+l6U3PPVp6PJ9dXlqdtH81s+32pBfT5d8uLUyZVNl7kvq9XG3vtenl65pPV3LLS97yfG66zXahuuatuuaTKdNVLi4+7Pqj2NPsKUNprq56+ZWc+XPu3srqzVzW/NVemmsZ0+veN96D8t9rmWfGe9bOT3r9hGS/3IX+34vaStPfgF7tQv5n02fk9K4MTWVoKkNTGZrK0FSGpjI0laGpDE1laCpDUxmaytBUhqYyNJWhqQxNZWgqQ1MZmsrQVIamMjSVoakMTWVoKkNTWes0U9HVE1Ut07RNdMWPRFS89wPQTMQjKoEmmmiiiSaaaLaNZhh6NF9rvRC83EAzhOaGF+ApbaIZQnPdq1SOJKrV2sZWolrb6kUzlKZ5kXmeqVa8mld4XitsbTYyGM09mvGdamk7YbZ3/Jdn/kFz/5obxvO2t4x5USnWzHq8UmxgLJp7RRIJ/80/KvnjGhuLpjA00UQTTTTRRBNNNNFEE0000UQTTTTRRBNNNNFEE0000UQTTTTRRBNNNNFE8z/NyIpSM7KCmqQKTWVoKkNTGZrK0FSGpjI0laGpDE1laCr7F05L8Sz5B9zGAAAAAElFTkSuQmCC)
+
+<br>
+
+#### 템플릿 영역을 만들어 배치하기
+템플릿 영역으로 항목을 배치하면 그리드 레이아웃을 만드는 것보다 더 쉬움. 
+```css
+.box1{
+  background-color: 3689ff;
+  grid-area: box1;
+}
+.box2{
+  background-color: #00cf12;
+  grid-area: box2;
+}
+.box3{
+  background-color: #ff9019;
+  grid-area: box3;
+}
+.box4{
+  background-color: #ffd000;
+  grid-area: box4;
+}
+``` 
+
+이어서 그리드 컨테이너로 사용하는 #wrapper 요소에서 gird-template-areas 속성을 사용해 템플릿 영역을 어떻게 배치할지 지정함. 템플릿 영역을 비워두려면 그 자리에 마침표(.)을 넣음. 한 줄에 들어갈 템플릿 영역을 큰따옴표("")로 묶어 주면되고 한줄마다 줄 바꿈을 하면 마치 눈으로 보듯 템플릿 영역을 나열할 수 있어서 좀 더 쉽게 작성할 수 있음.
+```css
+#wrapper{
+  width: 700px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3,100px);
+  grid-template-areas:
+  "box1 box1 box1"
+  "box2 box3 box3"
+  "box2 . box4";
+}
+```
