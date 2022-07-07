@@ -407,4 +407,102 @@ if(userNumber % 3 === 0)
   else
     alert("3의 배수가 아닙니다.");
 ```
-프로그래밍을 할ㄷ 떄 하나의 if~else문으로 해결되지 않는 상황이 더 많음. 
+프로그래밍을 할 때 하나의 if~else문으로 해결되지 않는 상황이 더 많음. 이럴 때는 if~else 문 안에 또다시 if~else문을 사용할 수 있음. 이렇게 다른 if~else문 안에 포함되는 if~else를 중첩된 if~else문이라고 함.
+```js
+var userNumber = prompt("숫자를 입력하세요.");
+
+if(userNumber !== null) { //입력값이 null이 아니면 if~else 문을 실행
+  if(userNumber % 3 === 0)
+    alert("3의 배수입니다,");
+  else
+    alert("3의 배수가 아닙니다,");
+}
+else
+  alert("입력이 취소됐습니다."); //입력값이 null이면 알림 창을 보여 줌
+```
+
+### 조건 연산자로 조건 체크하기
+만약 조건이 하나이고 true일 때와 false일 때 실행할 명령이 각각 하나뿐이라면 if~else 문 대신에 조건 연산자를 사용하는 것이 간단함. 조건 연산자는 '?'와 ':' 기호로 이루어짐.
+```js
+var userNumber = prompt("숫자를 입력하세요." );
+
+if(userNumber ! == null)
+  (userNumber % 3 === 0) ? alert("3의 배수입니다.") : alert("3의 배수가 아닙니다.");
+else
+  alert("입력이 취소됩니다.");
+```
+
+### 논리 연산자로 조건 체크하기
+조건을 2개 이상 체크할 경우에는 조건 연산자를 사용해 조건식을 만듬. 두 조건이 true일 경우와 조건 1개만 true일 경우처럼 여러 경우의 수를 따질 때는 논리 연산자를 사용함.
+
+#### OR 연산자
+OR 연산자 기호는 '||'를 사용하며, 피연산자 2개 중에서 true가 하나라도 있으면 결괏값은 ture 임.
+```
+op1     op2       op1 || op2
+false   false         false
+false   true          true 
+true    false         true
+true    true          true
+```
+```js
+var numberOne = prompt("50미만인 숫자를 입력하세요.");
+var numberTwo = prompt("50미만인 숫자를 입력하세요.");
+
+if(numberOne < 10 || numberTwo <10);
+  alert("둘 중 하나는 10보다 작습니다.);
+else
+  alert("둘다 10보다 큽니다.);
+```
+
+#### AND 연산자
+AND 연산자 기호는 '&&'를 사용하며, 피연산자 2개 중에서 false가 하나라도 있으면 결괏값은 false가 됨.
+```
+op1     op2       op1 && op2
+false   false         false
+false   true          false 
+true    false         false
+true    true          true
+```
+```js
+var numberOne = prompt("50미만인 숫자를 입력하세요.");
+var numberTwo = prompt("50미만인 숫자를 입력하세요.");
+
+if(numberOne < 50 && number < 50)
+  alert("숫자 2개 모두 50 미만이군요.");
+else
+  alart("조건에 맞지 않는 숫자가 있습니다.");
+```
+
+#### NOT 연산자
+NOT 연산자 기호는 '!'를 사용하며 true나 false를 반대로 뒤집습니다.
+```
+op      !op
+false   true
+true    false
+```
+```js
+if(userNumber !== null){ 실행할 명령 } //입력값이 null이 아니면 if 문을 실행
+```
+<h2> 조건 계산 빠르게 하는 방법 </h2>
+
+```
+조건이 2가지 이상일 경우 동시에 함께 체크하는 조건식을 만들 때는 첫 번째 조건을 보고 빠르게 판단할 수 있도록 해야 함. AND 연산자(&&)는 조건식이 둘 이상일 경우에 하나만 false여도 최종 결괏값이 false가 됨. 그러므로 첫 번째 조건이 (x === 10)이 false이면, 두 번째 조건식 (y === 20)은 체크하지 않고 바로 false가 됨. 이와 같이 AND 연산자(&&)를 사용한다면 false가 될 확률이 높은 조건을 첫 번째 조건식으로 사용하는 것이 좋음.
+```
+
+### switch 문
+자바스크립트에서 조건을 체크할 때 if~else 문을 사용하지만, 처리할 명령이 많다면 if~else 문을 여러 개 사용하는 것보다 switch문이 더 편리함.<p>
+switch 문에서 조건을 체크한 후 case문을 사용하여 명령을 처리할 수 있음. switch 문의 조건은 아래에 있는 case 문의 값과 일대일로 일치해야 함. 조건과 일치하는 case문의 명령을 실행한 후에는 switch 문을 완전히 빠져나옴 <p>
+switch의 조건이 case의 '값1'과 일치하면 '명령1'을 실행하고, 다음에 있는 break 문을 만나 switch문을 빠져나감. 만약 조건이 case의 '값2'와 일치하면 '명령2'를 실행함. 하지만 조건과 일치하는 case문이 없다면 마지막에 있는 default문을 실행시킴. default문은 switch 문의 마지막에 작성하며 여기에는 break 문을 쓰지 않음.
+```js
+var session = prompt("관심 세션을 선택해 주세요. 1-마케팅, 2-개발, 3-디자인");
+
+switch(session) {
+  case "1" : document.write("<p>마케팅 세션은 <strong>201호</strong>에서 ....</p>")
+    break;
+  case "2" : document.write("<p>개발 세션은 <strong>203호</strong>에서 ....</p>")
+    break;
+  case "3" : document.write("<p>디자인 세션은 <strong>205호</strong>에서 ....</p>")
+    break;
+  default: alert("잘못 입력");
+}
+```
